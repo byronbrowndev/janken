@@ -27,12 +27,14 @@
     </div>
     <div class="result unseen">
         <h1></h1>
+        <button>play again</button>
     </div>
 
     <script>
         // declare all my variables
         const CHOICES = ['r', 'p', 's'];
         const clickymabob = document.querySelector('.start > button');
+        const playAgain = document.querySelector('.result > button');
         const gogogo = document.querySelector('.prompt > button');
         const first = document.querySelector('.start');
         const second = document.querySelector('.prompt');
@@ -48,9 +50,12 @@
         clickymabob.addEventListener('click', displayStart);
         // addEventListener took some research to make sure it was done right, also debugging
         gogogo.addEventListener('click', () => evaluateChoice(textBox.value));
+        playAgain.addEventListener('click', displayStart);
+
         function displayStart() {
             first.className +=  ' unseen';
             second.className = 'prompt seen';
+            third.className = 'result unseen'
         } 
             
         function evaluateChoice(choose) {
@@ -58,33 +63,34 @@
             randomNumber = Math.floor(Math.random() * (2 - 0 + 1) );
             computerChoice = CHOICES[randomNumber];
             second.className = 'prompt unseen';
-            third.classList += 'result seen'
+            third.classList += 'result seen';
+
             switch (choose.charAt(0).toLowerCase()) {
                 case 'r':
                     if ( computerChoice === 'r' ) {
-                        resultText = 'the computer chose rock also. TIE!';
+                        resultText = 'you chose rock, the computer chose rock. TIE!';
                     } else if ( computerChoice === 'p' ) {
-                        resultText = 'the computer chose paper. YOU LOSE';
+                        resultText = 'you chose rock, the computer chose paper. YOU LOSE';
                     } else {
-                        resultText = 'the computer chose scissors, YOU WIN!!!';
+                        resultText = 'you chose rock, the computer chose scissors. YOU WIN!!!';
                     }
                     break;
                 case 'p':
                     if ( computerChoice === 'p' ) {
-                        resultText = 'the computer chose paper also. TIE!';
+                        resultText = 'you chose paper, the computer chose paper. TIE!';
                     } else if ( computerChoice === 's' ) {
-                        resultText = 'the computer chose scissors. YOU LOSE';
+                        resultText = 'you chose paper, the computer chose scissors. YOU LOSE';
                     } else {
-                        resultText = 'the computer chose rock, YOU WIN!!!';
+                        resultText = 'you chose paper, the computer chose rock. YOU WIN!!!';
                     }
                     break;
                 case 's':
                     if ( computerChoice === 's' ) {
-                        resultText = 'the computer chose scissors also. TIE!';
+                        resultText = 'you chose scissors, the computer chose scissors. TIE!';
                     } else if ( computerChoice === 'r' ) {
-                        resultText = 'the computer chose rock. YOU LOSE';
+                        resultText = 'you chose scissors, the computer chose rock. YOU LOSE';
                     } else {
-                        resultText = 'the computer chose paper, YOU WIN!!!';
+                        resultText = 'you chose scissors, the computer chose paper. YOU WIN!!!';
                     }
                     break;
             
@@ -92,7 +98,9 @@
                     alert('what exactly are you trying to do? reload a try again.');
                     break;
             }
+            
             resultHeader.innerHTML = resultText;
+            textBox.value = '';
         }
     </script>
 
