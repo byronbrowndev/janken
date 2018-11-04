@@ -7,54 +7,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script> -->
+    <style>
+        .seen {
+            display: block;
+        }
+
+        .unseen {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <div class="start">
+        <button>start</button>
+    </div>
+    <div class="prompt unseen">
+        <input type="text" placeholder="rock, paper, or scissors">
+        <button>go</button>
+    </div>
+    <div class="result unseen">
+        <h1></h1>
+    </div>
+
     <script>
-        // on load the game starts
-        // the page prompts for rock paper or scissors
-        const choose = prompt('rock, paper, or scissors');
-        // the computer randomly picks from the same array
-        // i google javascript random number finding and reviewing https://www.w3schools.com/js/js_random.asp
-        const randomNumber = Math.floor(Math.random() * (2 - 0 + 1) );
-        const choices = ['r', 'p', 's'];
-        const computerChoice = choices[randomNumber];
-        // your pick is compared to the computer
-        // if/switch statement evaluates your input agains the computers
-        // document.write win or lose
-        switch (choose.charAt(0).toLowerCase()) {
-            case 'r':
-                if ( computerChoice === 'r' ) {
-                    alert('the computer chose rock. TIE!');
-                } else if ( computerChoice === 'p' ) {
-                    alert('the computer chose paper. YOU LOSE');
-                } else {
-                    alert('the computer chose scissors, YOU WIN!!!');
-                }
-                break;
-            case 'p':
-                if ( computerChoice === 'p' ) {
-                    alert('the computer chose paper. TIE!');
-                } else if ( computerChoice === 's' ) {
-                    alert('the computer chose scissors. YOU LOSE');
-                } else {
-                    alert('the computer chose rock, YOU WIN!!!');
-                }
-                break;
-            case 's':
-                if ( computerChoice === 's' ) {
-                    alert('the computer chose scissors. TIE!');
-                } else if ( computerChoice === 'r' ) {
-                    alert('the computer chose rock. YOU LOSE');
-                } else {
-                    alert('the computer chose paper, YOU WIN!!!');
-                }
-                break;
-        
-            default:
-                alert('what exactly are you trying to do? reload a try again.');
-                break;
+        // declare all my variables
+        const CHOICES = ['r', 'p', 's'];
+        const clickymabob = document.querySelector('.start > button');
+        const gogogo = document.querySelector('.prompt > button');
+        const first = document.querySelector('.start');
+        const second = document.querySelector('.prompt');
+        const third = document.querySelector('.result');
+        const textBox = document.querySelector('input');
+        const resultHeader = document.querySelector('.result > h1')
+        // const goButton = document.querySelector('.prompt > go');
+        let randomNumber;
+        let computerChoice;
+        let resultText;
+
+        // on click the game starts
+        clickymabob.addEventListener('click', displayStart);
+        // addEventListener took some research to make sure it was done right, also debugging
+        gogogo.addEventListener('click', () => evaluateChoice(textBox.value));
+        function displayStart() {
+            first.className +=  ' unseen';
+            second.className = 'prompt seen';
+        } 
+            
+        function evaluateChoice(choose) {
+            // i google javascript random number finding and reviewing https://www.w3schools.com/js/js_random.asp
+            randomNumber = Math.floor(Math.random() * (2 - 0 + 1) );
+            computerChoice = CHOICES[randomNumber];
+            second.className = 'prompt unseen';
+            third.classList += 'result seen'
+            switch (choose.charAt(0).toLowerCase()) {
+                case 'r':
+                    if ( computerChoice === 'r' ) {
+                        resultText = 'the computer chose rock also. TIE!';
+                    } else if ( computerChoice === 'p' ) {
+                        resultText = 'the computer chose paper. YOU LOSE';
+                    } else {
+                        resultText = 'the computer chose scissors, YOU WIN!!!';
+                    }
+                    break;
+                case 'p':
+                    if ( computerChoice === 'p' ) {
+                        resultText = 'the computer chose paper also. TIE!';
+                    } else if ( computerChoice === 's' ) {
+                        resultText = 'the computer chose scissors. YOU LOSE';
+                    } else {
+                        resultText = 'the computer chose rock, YOU WIN!!!';
+                    }
+                    break;
+                case 's':
+                    if ( computerChoice === 's' ) {
+                        resultText = 'the computer chose scissors also. TIE!';
+                    } else if ( computerChoice === 'r' ) {
+                        resultText = 'the computer chose rock. YOU LOSE';
+                    } else {
+                        resultText = 'the computer chose paper, YOU WIN!!!';
+                    }
+                    break;
+            
+                default:
+                    alert('what exactly are you trying to do? reload a try again.');
+                    break;
+            }
+            resultHeader.innerHTML = resultText;
         }
-        document.write('<h1>reload(f5) to play again</h1>')
     </script>
 
 </body>
