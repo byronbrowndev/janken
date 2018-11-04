@@ -9,14 +9,53 @@
     <script src="main.js"></script> -->
 </head>
 <body>
-    <!-- // on load the game starts
-    // on click of the button the game prompts for rock paper or scissors
-    // the computer randomly picks from the same array
-    // your pick is compared to the computer
-    // if/switch statement evaluates your input agains the computers
-    // document.write win or lose -->
-
-    <!-- // i'll stop here to start my github -->
+    <script>
+        // on load the game starts
+        // the page prompts for rock paper or scissors
+        const choose = prompt('rock, paper, or scissors');
+        // the computer randomly picks from the same array
+        // i google javascript random number finding and reviewing https://www.w3schools.com/js/js_random.asp
+        const randomNumber = Math.floor(Math.random() * (2 - 0 + 1) );
+        const choices = ['r', 'p', 's'];
+        const computerChoice = choices[randomNumber];
+        // your pick is compared to the computer
+        // if/switch statement evaluates your input agains the computers
+        // document.write win or lose
+        switch (choose.charAt(0).toLowerCase()) {
+            case 'r':
+                if ( computerChoice === 'r' ) {
+                    alert('the computer chose rock. TIE!');
+                } else if ( computerChoice === 'p' ) {
+                    alert('the computer chose paper. YOU LOSE');
+                } else {
+                    alert('the computer chose scissors, YOU WIN!!!');
+                }
+                break;
+            case 'p':
+                if ( computerChoice === 'p' ) {
+                    alert('the computer chose paper. TIE!');
+                } else if ( computerChoice === 's' ) {
+                    alert('the computer chose scissors. YOU LOSE');
+                } else {
+                    alert('the computer chose rock, YOU WIN!!!');
+                }
+                break;
+            case 's':
+                if ( computerChoice === 's' ) {
+                    alert('the computer chose scissors. TIE!');
+                } else if ( computerChoice === 'r' ) {
+                    alert('the computer chose rock. YOU LOSE');
+                } else {
+                    alert('the computer chose paper, YOU WIN!!!');
+                }
+                break;
+        
+            default:
+                alert('what exactly are you trying to do? reload a try again.');
+                break;
+        }
+        document.write('<h1>reload(f5) to play again</h1>')
+    </script>
 
 </body>
 </html>
